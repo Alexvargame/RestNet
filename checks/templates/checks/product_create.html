@@ -1,0 +1,50 @@
+﻿{% extends 'checks/checks_base.html'%}
+ 
+	<h1>HI</h1>
+ 
+{% block title %}
+		
+	Новый товар
+{% endblock %}
+
+
+{% block content %}
+	<style>
+		table {
+ 		 font-family: arial, sans-serif;
+ 		 border-collapse: collapse;
+ 		 width: 100%;
+		}
+
+		td, th {
+  		border: 1px solid #dddddd;
+  		text-align: left;
+  		padding: 8px;
+		}
+
+		tr:nth-child(even) {
+  		background-color: #dddddd;
+		}
+	</style>
+	
+	<form action="{% url 'product_create_url' %}" method='post' >
+			{% csrf_token %}
+		<div class="form-group">
+			<table style="width:60%">
+				<tr>
+					<td style="font-size:100%;width:10%"> Название {{form.name}}</td>
+					<td style="font-size:100%;width:10%"> Цена {{form.price}}</td>
+					<td style="font-size:100%;width:10%" hidden> Кол-во {{form.in_stock}}</td>
+				</tr>
+			</table>
+		</div>
+
+		
+		<button type="submit" class="btn btn-primary">Сохранить</button>
+	</form>
+
+{{message}}
+
+{% endblock %} 
+
+

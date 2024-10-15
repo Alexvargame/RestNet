@@ -1,0 +1,78 @@
+﻿{% extends 'checks/checks_base.html'%}
+ 
+	<h1>HI</h1>
+ 
+{% block title %}
+		
+	Детализация чека
+{% endblock %}
+
+
+
+{% block content %}
+	<style>
+			table {
+			 font-family: arial, sans-serif;
+			 border-collapse: collapse;
+			 width: 40%;
+			}
+			td, th {
+			border: 1px solid #dddddd;
+			text-align: left;
+			padding: 8px;
+			}
+
+			tr:nth-child(even) {
+			background-color: #dddddd;
+			}
+	</style>
+
+	<ul class="list-group list-group-flush">
+		<li class="list-group-item">Номер заказа {{check.order.order_id}} </li>
+		<li class="list-group-item">Создал чек  {{check.get_creator}} </li>
+		<li class="list-group-item">Принтер-{{check.printer_id}}</li>
+  	  	<li class="list-group-item">Статус-{{check.status}}</li>
+		<li class="list-group-item">Заказ-
+			<table>
+				<tr>
+					<th style="width:2%">Наименование</th>
+					<th style="width:5%">Кол-во</th>
+					<th style="width:5%">Цена</th>
+					<th style="width:5%">Сумма</th>
+				 </tr>
+
+				{%for key,value in check.get_order_list.items%}
+				<tr>
+					<td style="font-size:80%"> {{key}}</td>
+					<td style="font-size:80%;">{{value.quantity}}</td>
+					<td style="font-size:80%;">{{value.price}}</td>
+					<td style="font-size:80%;">{{value.total_price}}</td>
+				</tr>
+				{%endfor%}
+				<tr>
+					<td style="font-size:80%">Итого</td>
+					<td></td>
+					<td></td>
+					<td style="font-size:80%">{{check.get_order_summa}}</td>
+				</tr>
+
+		</table>
+		<li class="list-group-item">Файл-{{check.pdf_file}}</li>
+
+ 	 </ul>
+
+
+	{% if request.user.is_authenticated %}
+		<div class="obj-panel">
+			 <p>Выбрать</p>
+				 {% block obj-panel%}
+					<a class="btn btn-light" href="">Редктировать</a>
+					<a class="btn btn-danger" href="">Del</a>
+					<a class="btn btn-light" href="">Вернуться к списку</a>
+				 {%endblock%}
+		</div>
+	{% endif%}
+
+{% endblock %} 
+
+<!--{flat.get_absolute_url}-->

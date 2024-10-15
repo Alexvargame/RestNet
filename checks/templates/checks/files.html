@@ -1,0 +1,62 @@
+﻿{% extends 'checks/checks_base.html'%}
+
+<h1 xmlns="http://www.w3.org/1999/html">HI</h1>
+ 
+{% block title %}
+		
+	Заказы
+{% endblock %}
+
+
+{% block content %}
+	<style>
+		table {
+ 		 font-family: arial, sans-serif;
+ 		 border-collapse: collapse;
+ 		 width: 40%;
+		}
+
+		td, th {
+  		border: 1px solid #dddddd;
+  		text-align: left;
+  		padding: 8px;
+		}
+
+		tr:nth-child(even) {
+  		background-color: #dddddd;
+		}
+	</style>
+
+	 <details>
+	  <summary>Чеки</summary>
+
+		<table>
+			<tr>
+				 <th style="width:2%">I</th>
+				 <th style="width:5%">Статус</th>
+				 <th style="width:5%">Тип чека</th>
+				 <th style="width:5%">Файл</th>
+			 </tr>
+
+			{% for check in query %}
+
+				<tr>
+					<td style="font-size:80%"><a href="{{check.get_absolute.url}}"> I</a></td>
+					<td style="font-size:80%;">{{check.status}}</td>
+					<td style="font-size:80%;">{{check.type}}</td>
+					<td style="font-size:80%;"><a href="{{check.get_absolute_url}}">{{check.pdf_file}}</a></td>
+
+				</tr>
+
+			{%endfor%}
+
+		</table>
+		 <p>Всего чеков {{length}} на сумму:{{summary}}</p>
+	 </details>
+
+<a class="btn btn-primary" href="{% url 'cart_detail_url' %}" role="button">Новый заказ</a>
+
+{{s}}
+{% endblock %} 
+
+<!--{flat.get_absolute_url}-->

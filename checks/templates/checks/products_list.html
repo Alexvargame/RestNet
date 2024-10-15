@@ -1,0 +1,57 @@
+﻿{% extends 'checks/checks_base.html'%}
+
+<h1 xmlns="http://www.w3.org/1999/html">HI</h1>
+ 
+{% block title %}
+		
+	Продукты
+{% endblock %}
+
+
+{% block content %}
+	<style>
+		table {
+ 		 font-family: arial, sans-serif;
+ 		 border-collapse: collapse;
+ 		 width: 40%;
+		}
+
+		td, th {
+  		border: 1px solid #dddddd;
+  		text-align: left;
+  		padding: 8px;
+		}
+
+		tr:nth-child(even) {
+  		background-color: #dddddd;
+		}
+	</style>
+
+	<table>
+			<tr>
+			 	<th style="width:2%">Название</th>
+			 	<th style="width:5%">Цена</th>
+				<th style="width:5%">Кол-во на складе</th>
+			 </tr>
+
+			{% for product in products %}
+
+				<tr>
+					<td style="font-size:80%"> <a href="{{product.get_absolute_url}}"> {{product.name}}</a></td>
+					<td style="font-size:80%;">{{product.price}}</td>
+					<td style="font-size:80%;">{{product.in_stock}}</td>
+
+				</tr>
+
+			{%endfor%}
+
+	</table>
+
+
+
+<a class="btn btn-primary" href="{%url 'product_create_url'%}" role="button">Добавить новый товар</a>
+
+{{s}}
+{% endblock %} 
+
+<!--{flat.get_absolute_url}-->

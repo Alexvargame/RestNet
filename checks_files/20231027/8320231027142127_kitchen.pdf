@@ -1,0 +1,8 @@
+_state-<django.db.models.base.ModelState object at 0x000001FAE6AAB9A0>
+id-195
+printer_id_id-2
+type-kitchen
+order-{'order_id': '8320231027142127', 'creator': 1, 'date_created': '2023 10 27 14:21:27', 'order': {1: {'quantity': 1.0, 'product': 'Ïèööà', 'price': '20.00', 'total_price': '20.00'}}}
+order_created_id-1
+status-new
+pdf_file-8320231027142127_kitchen.pdf

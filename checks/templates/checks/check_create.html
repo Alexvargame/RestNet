@@ -1,0 +1,65 @@
+﻿{% extends 'checks/checks_base.html'%}
+ 
+	<h1>HI</h1>
+ 
+{% block title %}
+		
+	Новый заказ
+{% endblock %}
+
+
+{% block content %}
+	<style>
+		table {
+ 		 font-family: arial, sans-serif;
+ 		 border-collapse: collapse;
+ 		 width: 40%;
+		}
+
+		td, th {
+  		border: 1px solid #dddddd;
+  		text-align: left;
+  		padding: 8px;
+		}
+
+		tr:nth-child(even) {
+  		background-color: #dddddd;
+		}
+	</style>
+		<table>
+				<tr>
+					 <th style="width:2%">Товар</th>
+					 <th style="width:5%">Кол-во</th>
+					 <th style="width:5%">Цена за единицу</th>
+					 <th style="width:5%">Всего</th>
+				 </tr>
+
+					{% for item in cart %}
+
+						<tr>
+							<td style="font-size:80%"> {{item.product}}</td>
+							<td style="font-size:80%;">{{item.quantity}}</td>
+							<td style="font-size:80%;">{{item.price}}</td>
+							<td style="font-size:80%;">{{item.total_price}}</td>
+						</tr>
+
+					{%endfor%}
+				<tr>
+					<td style="font-size:80%">Итого</td>
+					<td></td>
+					<td></td>
+					<td style="font-size:80%">{{cart.get_total_price}}</td>
+				</tr>
+		</table>
+	{{message}}
+	<form action="{% url 'check_create_url' %}" method='post' >
+			{% csrf_token %}
+		<div class="form-group">
+		</div>
+		<button type="submit" class="btn btn-primary">Сохранить</button>
+	</form>
+
+
+{% endblock %} 
+
+

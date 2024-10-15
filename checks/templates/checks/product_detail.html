@@ -1,0 +1,57 @@
+﻿{% extends 'checks/checks_base.html'%}
+
+	<h1>HI</h1>
+ 
+{% block title %}
+		
+	Детализация товара
+{% endblock %}
+
+
+
+{% block content %}
+	<style>
+			table {
+			 font-family: arial, sans-serif;
+			 border-collapse: collapse;
+			 width: 40%;
+			}
+			td, th {
+			border: 1px solid #dddddd;
+			text-align: left;
+			padding: 8px;
+			}
+
+			tr:nth-child(even) {
+			background-color: #dddddd;
+			}
+	</style>
+
+	<ul class="list-group list-group-flush">
+		<table>
+		<li class="list-group-item">Название {{product.name}} </li>
+		<li class="list-group-item">Цена  {{product.price}} </li>
+		<li class="list-group-item">Наличие-{{product.in_stock}}</li>
+		</table>
+ 	 </ul>
+	 <form action="{% url 'cart_add_url' product_id=product.id %}" method="post">
+		{{ cart_add_form }}
+		 {% csrf_token %}
+		 <input type="submit" value="Add to cart">
+	 </form>
+
+
+		{% if request.user.is_authenticated and request.user.is_staff%}
+			<div class="obj-panel">
+				 <p>Выбрать</p>
+					 {% block obj-panel%}
+						<a class="btn btn-light" href="{{product.get_update_url}}">Редатировать</a>
+						<a class="btn btn-danger" href="{{product.get_delete_url}}">Del</a>
+						<a class="btn btn-light" href="{%url 'products_list_url'%}">Вернуться к списку</a>
+					 {%endblock%}
+			</div>
+	{% endif%}
+
+{% endblock %} 
+
+<!--{flat.get_absolute_url}-->

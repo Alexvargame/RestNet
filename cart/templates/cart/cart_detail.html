@@ -1,0 +1,55 @@
+﻿{% extends 'checks/checks_base.html'%}
+ 
+	<h1>HI</h1>
+ 
+{% block title %}
+		
+	Корзина
+{% endblock %}
+
+
+
+{% block content %}
+	<h1>Your shopping cart</h1>
+ <table class="cart">
+	 <thead>
+		 <tr>
+			 <th>Товар</th>
+			 <th>Кол-во</th>
+			 <th>Удалить</th>
+			 <th>Цена за ед.</th>
+			 <th>Цена</th>
+		 </tr>
+ 	 </thead>
+	 <tbody>
+		 {% for item in cart %}
+		 {% with product=item.product %}
+			 <tr>
+				 <td><a href="{{ product.get_absolute_url }}"></a>{{ product.name }}</td>
+				 <td><form action="{% url 'cart_add_url' product_id=product.id%}" method="post">
+						 {{ item.update_quantity_form.quantity }}
+						 {{ item.update_quantity_form.update }}
+						 <input type="submit" value="Update">
+						 {% csrf_token %}
+					 </form>
+				 </td>
+				 <td><a href="{% url 'cart_remove_url' product_id=product.id%}">Remove</a></td>
+				 <td class="num">${{ item.price }}</td>
+				 <td class="num">${{ item.total_price }}</td>
+		 	 </tr>
+		 {% endwith %}
+		 {% endfor %}
+			 <tr class="total">
+				 <td>Total</td>
+				 <td colspan="3"></td>
+				 <td class="num">${{ cart.get_total_price }}</td>
+			 </tr>
+	 </tbody>
+ </table>
+ <p class="text-right">
+ <a href="{% url 'products_list_url' %}" class="button light">Continue shopping</a>
+ <a href="{% url 'check_create_url' %}" class="button">Checkout</a>
+ </p>
+{% endblock %} 
+
+<!--{flat.get_absolute_url}-->
